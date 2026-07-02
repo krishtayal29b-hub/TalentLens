@@ -1,0 +1,125 @@
+{
+  "total_candidates": 100000,
+  "honeypot_count": 44,
+  "avg_score": 0.2885,
+  "top100_min_score": 0.7755,
+  "score_histogram": {
+    "0.0": 22875,
+    "0.1": 11534,
+    "0.2": 8952,
+    "0.3": 20374,
+    "0.4": 28023,
+    "0.5": 6733,
+    "0.6": 1082,
+    "0.7": 364,
+    "0.8": 54,
+    "0.9": 9
+  },
+  "top_titles": [
+    [
+      "Business Analyst",
+      5833
+    ],
+    [
+      "HR Manager",
+      5830
+    ],
+    [
+      "Mechanical Engineer",
+      5791
+    ],
+    [
+      "Accountant",
+      5764
+    ],
+    [
+      "Project Manager",
+      5754
+    ],
+    [
+      "Customer Support",
+      5750
+    ],
+    [
+      "Operations Manager",
+      5744
+    ],
+    [
+      "Content Writer",
+      5727
+    ],
+    [
+      "Sales Executive",
+      5713
+    ],
+    [
+      "Civil Engineer",
+      5702
+    ],
+    [
+      "Graphic Designer",
+      5689
+    ],
+    [
+      "Marketing Manager",
+      5524
+    ]
+  ],
+  "top_locations": [
+    [
+      "Bhubaneswar, Odisha",
+      4321
+    ],
+    [
+      "Noida, Uttar Pradesh",
+      4283
+    ],
+    [
+      "Hyderabad, Telangana",
+      4283
+    ],
+    [
+      "Jaipur, Rajasthan",
+      4268
+    ],
+    [
+      "Bangalore, Karnataka",
+      4238
+    ],
+    [
+      "Kolkata, West Bengal",
+      4230
+    ],
+    [
+      "Indore, Madhya Pradesh",
+      4198
+    ],
+    [
+      "Pune, Maharashtra",
+      4186
+    ],
+    [
+      "Chennai, Tamil Nadu",
+      4164
+    ],
+    [
+      "Delhi, Delhi",
+      4161
+    ],
+    [
+      "Trivandrum, Kerala",
+      4151
+    ],
+    [
+      "Ahmedabad, Gujarat",
+      4143
+    ]
+  ],
+  "experience_buckets": {
+    "0-2": 7470,
+    "14+": 5158,
+    "2-5": 26400,
+    "5-9": 33611,
+    "9-14": 27361
+  }
+}

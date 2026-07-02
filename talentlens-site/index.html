@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentLens | AI-Powered ATS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js"></script>
+  </head>
+  <body>
+  <div class="popup-overlay" id="welcomePopup"
+       role="dialog" aria-modal="true"
+       aria-labelledby="popupHeading">
+    <div class="popup-card">
+      <div class="brand" style="justify-content:center;
+           margin-bottom:20px;font-size:18px">
+        <span class="brand-mark">TL</span>
+        <span>TalentLens</span>
+      </div>
+      <h2 id="popupHeading">Welcome to TalentLens</h2>
+      <p>AI-powered career matching. Fair by design.
+         Match resumes to roles, eliminate bias, and guide
+         candidates with real skill gap analysis.</p>
+      <div class="popup-actions">
+        <a class="button primary large"
+           href="./candidate.html"
+           target="_blank" rel="noopener"
+           id="popupStart">Get started</a>
+        <button class="button secondary large"
+                id="popupDismiss" type="button">
+          Don't show again
+        </button>
+      </div>
+    </div>
+  </div>
+    <header class="topbar" id="topbar">
+      <a class="brand" href="#home" aria-label="TalentLens home">
+        <span class="brand-mark">TL</span>
+        <span>TalentLens</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./recruiter.html" target="_blank" rel="noopener">Recruiter</a>
+        <a href="./candidate.html" target="_blank" rel="noopener">Candidate</a>
+        <a href="./explorer.html" target="_blank" rel="noopener">Explorer</a>
+        <a href="./sandbox.html" target="_blank" rel="noopener">Sandbox</a>
+        <a href="#security">Security</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="icon-button" id="notifyButton" aria-label="Open notifications" title="Notifications">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5" />
+            <path d="M9 17a3 3 0 0 0 6 0" />
+          </svg>
+          <span class="notification-dot"></span>
+        </button>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+          <span>Blue</span>
+          <span class="switch" aria-hidden="true"><span></span></span>
+          <span>Green</span>
+        </button>
+        <a class="button primary" href="./candidate.html" target="_blank" rel="noopener">Open app</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <div class="live-badge">
+            <span></span>
+            AI screening workspace
+          </div>
+          <h1>Hire smarter. Screen fairly. Move faster.</h1>
+          <p>
+            TalentLens matches resumes to job descriptions, ranks candidates with transparent
+            scoring, masks bias-prone details, and gives applicants useful career guidance.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary large" href="./recruiter.html" target="_blank" rel="noopener">Open recruiter window</a>
+            <a class="button secondary large" href="./candidate.html" target="_blank" rel="noopener">Open candidate window</a>
+            <a class="button secondary large" href="./explorer.html" target="_blank" rel="noopener">Open explorer</a>
+          </div>
+          <div class="hero-proof">
+            <span><strong>1,284</strong> resumes analyzed</span>
+            <span><strong>92%</strong> review time saved</span>
+            <span><strong>3-layer</strong> privacy model</span>
+          </div>
+        </div>
+
+        <div class="product-preview" aria-label="TalentLens dashboard preview">
+          <div class="scan-line"></div>
+          <div class="preview-header">
+            <div>
+              <span class="eyebrow">Live role</span>
+              <h2>Senior AI Engineer — Founding Team</h2>
+            </div>
+            <span class="status active">Active</span>
+          </div>
+          <div class="preview-grid">
+            <article class="metric-card">
+              <span>Qualified</span>
+              <strong class="mono">38</strong>
+              <small>+12 this week</small>
+            </article>
+            <article class="metric-card">
+              <span>Avg score</span>
+              <strong class="mono">76%</strong>
+              <small>Fairness filter on</small>
+            </article>
+            <article class="metric-card">
+              <span>Time saved</span>
+              <strong class="mono">31h</strong>
+              <small>Across hiring team</small>
+            </article>
+          </div>
+          <div class="rank-list">
+            <div class="rank-row">
+              <span class="avatar">SA</span>
+              <div>
+                <strong>Sneha Arora</strong>
+                <small>Python, Sentence Transformers, OpenSearch</small>
+              </div>
+              <span class="score good">92%</span>
+            </div>
+            <div class="rank-row">
+              <span class="avatar">NP</span>
+              <div>
+                <strong>Nisha Pillai</strong>
+                <small>PyTorch, Weaviate, RAG</small>
+              </div>
+              <span class="score good">92%</span>
+            </div>
+            <div class="rank-row">
+              <span class="avatar">PK</span>
+              <div>
+                <strong>Priya Kumar</strong>
+                <small>Django, Python, SQL</small>
+              </div>
+              <span class="score low">14%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band" id="demo">
+        <div class="section-header">
+          <span class="eyebrow">Command center</span>
+          <h2>Two portals, one hiring truth</h2>
+          <p>
+            The product spec calls for a recruiter portal, a candidate portal, explainable AI,
+            privacy controls, charts, notifications, and a career assistant. This site turns those
+            requirements into a cohesive first-screen product demo.
+          </p>
+        </div>
+        <div class="workspace">
+          <aside class="sidebar" aria-label="Demo sidebar">
+            <a class="side-item active" href="#demo">
+              <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" /></svg>
+              Overview
+            </a>
+            <a class="side-item" href="#recruiter">
+              <svg viewBox="0 0 24 24"><path d="M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" /><path d="M17 11h4M19 9v4M3 21a6 6 0 0 1 12 0" /></svg>
+              Recruiter
+            </a>
+            <a class="side-item" href="#candidate">
+              <svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></svg>
+              Candidate
+            </a>
+            <a class="side-item" href="#matching">
+              <svg viewBox="0 0 24 24"><path d="M4 12h4l2-7 4 14 2-7h4" /></svg>
+              AI Matching
+            </a>
+            <a class="side-item" href="#security">
+              <svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z" /></svg>
+              Security
+            </a>
+          </aside>
+          <div class="dashboard">
+            <div class="toolbar">
+              <div>
+                <h3>Hiring pulse</h3>
+                <p>Role-level signal without exposing sensitive candidate fields.</p>
+              </div>
+              <button class="button secondary" id="simulateButton" type="button">Simulate scan</button>
+            </div>
+            <div class="dashboard-grid">
+              <article class="card">
+                <span class="card-label">Pipeline health</span>
+                <div class="donut" style="--value: 78">
+                  <span class="mono">78%</span>
+                  <small>fit</small>
+                </div>
+                <p>Strong role alignment with three applicants needing skills verification.</p>
+              </article>
+              <article class="card">
+                <span class="card-label">Bias guard</span>
+                <h3>Blind mode active</h3>
+                <p>Name, photo, age, school prestige, and address fields are hidden during initial review.</p>
+                <div class="pill-row">
+                  <span class="pill blue">PII masked</span>
+                  <span class="pill green">Audit log</span>
+                </div>
+              </article>
+              <article class="card">
+                <span class="card-label">Candidate guidance</span>
+                <h3>Personalized next steps</h3>
+                <p>Applicants receive score explanations, missing skills, interview questions, and a roadmap.</p>
+                <div class="pill-row">
+                  <span class="pill amber">Resume tips</span>
+                  <span class="pill blue">Chat assistant</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="recruiter">
+        <div class="section-header">
+          <span class="eyebrow">Recruiter portal</span>
+          <h2>Rank candidates with explainable evidence</h2>
+          <p>
+            Recruiters can create jobs, define must-have skills, enable blind screening, and review
+            candidates by role fit instead of guesswork.
+          </p>
+        </div>
+        <div class="split">
+          <form class="job-form card" id="jobForm">
+            <h3>Create job</h3>
+            <label>
+              Role title
+              <input id="roleTitle" type="text" value="Senior AI Engineer — Founding Team" />
+            </label>
+            <label>
+              Job description
+              <textarea id="jobDescription" rows="5">Own the ranking, retrieval, and matching systems that decide what recruiters see. Production embeddings, vector search, and rigorous evaluation (NDCG, MRR, MAP) required.</textarea>
+            </label>
+            <label>
+              Skills
+              <div class="tag-input" id="tagInput">
+                <span class="tag">Embeddings<button type="button" aria-label="Remove Embeddings">x</button></span>
+                <span class="tag">Vector Search<button type="button" aria-label="Remove Vector Search">x</button></span>
+                <span class="tag">Python<button type="button" aria-label="Remove Python">x</button></span>
+                <input type="text" id="skillInput" placeholder="Type + Enter" />
+              </div>
+            </label>
+            <label class="toggle-row">
+              <span>
+                Blind screening
+                <small>Hide bias-prone candidate details during first pass.</small>
+              </span>
+              <input id="blindToggle" type="checkbox" checked />
+            </label>
+          </form>
+          <div class="card table-card">
+            <div class="card-heading">
+              <h3>Candidate ranking</h3>
+              <span class="status screening">Screening</span>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" aria-label="Select all candidates" /></th>
+                  <th>Candidate</th>
+                  <th>Match</th>
+                  <th>Missing skills</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="candidateRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band" id="candidate">
+        <div class="section-header">
+          <span class="eyebrow">Candidate portal</span>
+          <h2>Show applicants what to improve</h2>
+          <p>
+            A candidate does not just get rejected or accepted. They get a transparent score, the
+            skills gap, recommended interview prep, and a guided next step.
+          </p>
+        </div>
+        <div class="candidate-panel">
+          <div class="upload-card card">
+            <h3>Resume upload</h3>
+            <div class="upload-zone" id="uploadZone">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M5 21h14" /></svg>
+              <strong>Drop PDF resume here</strong>
+              <span>or click to simulate analysis</span>
+            </div>
+            <div class="progress-track">
+              <span class="step done">Uploaded</span>
+              <span class="step done">Parsed</span>
+              <span class="step active">Scored</span>
+              <span class="step">Guided</span>
+            </div>
+          </div>
+          <div class="result-card card">
+            <div class="result-top">
+              <div>
+                <span class="card-label">Current analysis</span>
+                <h3>Senior AI Engineer role</h3>
+              </div>
+              <div class="score-ring" id="scoreRing" style="--score: 14">
+                <span class="mono">14%</span>
+              </div>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Analysis tabs">
+              <button class="tab active" data-tab="gaps" type="button">Gaps</button>
+              <button class="tab" data-tab="strengths" type="button">Strengths</button>
+              <button class="tab" data-tab="questions" type="button">Questions</button>
+            </div>
+            <div class="tab-panel" id="tabPanel"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="matching">
+        <div class="section-header">
+          <span class="eyebrow">AI matching</span>
+          <h2>Role requirements compared to candidate profile</h2>
+          <p>
+            Score color rules are applied everywhere: strong matches use the active theme color,
+            partial matches use amber, and poor matches use red.
+          </p>
+        </div>
+        <div class="matching-grid">
+          <div class="card">
+            <h3>Skill radar</h3>
+            <div class="radar" aria-label="Skill radar chart">
+              <div class="radar-ring r1"></div>
+              <div class="radar-ring r2"></div>
+              <div class="radar-ring r3"></div>
+              <div class="radar-shape requirements"></div>
+              <div class="radar-shape candidate"></div>
+              <span>Embeddings</span>
+              <span>Vector Search</span>
+              <span>Ranking Eval</span>
+              <span>Python</span>
+              <span>LLM FT</span>
+            </div>
+            <div class="legend">
+              <span><i class="legend-primary"></i>Role requirements</span>
+              <span><i class="legend-warning"></i>Candidate profile</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Scoring logic demo</h3>
+            <div class="score-list">
+              <div><span>Senior AI Engineer (ranker/retrieval)</span><strong class="score good">92%</strong></div>
+              <div><span>ML engineer, adjacent stack</span><strong class="score good">78%</strong></div>
+              <div><span>Data engineer, some ML exposure</span><strong class="score mid">67%</strong></div>
+              <div><span>Backend/Django-only resume</span><strong class="score low">14%</strong></div>
+            </div>
+            <p>
+              The low score path is intentional: a backend-only resume with no retrieval, ranking,
+              or embeddings evidence should not be inflated for this AI-engineering role.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band" id="security">
+        <div class="section-header">
+          <span class="eyebrow">Security architecture</span>
+          <h2>Privacy is part of the product surface</h2>
+          <p>
+            The spec calls for JWT access, Firebase row-level rules, upload validation, rate
+            limiting, audit logs, and GDPR storage limits. The site presents those rules as visible
+            product commitments.
+          </p>
+        </div>
+        <div class="security-grid">
+          <article class="security-item">
+            <strong>Candidate ownership</strong>
+            <span>Profiles, history, applications, and notifications are scoped to the signed-in user.</span>
+          </article>
+          <article class="security-item">
+            <strong>Upload hardening</strong>
+            <span>PDF magic bytes, 5MB cap, UUID filenames, private storage, and malware scan hook.</span>
+          </article>
+          <article class="security-item">
+            <strong>Fair review</strong>
+            <span>Blind mode masks identity signals and logs every non-blind recruiter profile view.</span>
+          </article>
+          <article class="security-item">
+            <strong>Rate limits</strong>
+            <span>Login, upload, chat, and API routes are protected with user/IP-specific limits.</span>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="notification-panel" id="notificationPanel" aria-label="Notifications">
+      <div class="panel-header">
+        <strong>Notifications</strong>
+        <button class="icon-button small" id="closeNotifications" aria-label="Close notifications">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+      </div>
+      <div class="notice">
+        <strong>Analysis complete</strong>
+        <span>Priya Kumar scored 14% for Senior AI Engineer. Missing: Embeddings, Vector Search, Ranking Evaluation.</span>
+      </div>
+      <div class="notice">
+        <strong>Blind mode enabled</strong>
+        <span>Identity fields are hidden for the active job.</span>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast">Resume scan complete. Score recalculated with role-specific evidence.</div>
+
+    <section class="chat-widget" id="chatWidget" aria-label="TalentLens AI chat">
+      <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open TalentLens AI">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z" /></svg>
+      </button>
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <span class="bot-avatar">AI</span>
+          <div>
+            <strong>TalentLens AI</strong>
+            <small>Online &middot; Career Expert</small>
+          </div>
+          <button class="icon-button small" id="minimizeChat" aria-label="Minimize chat">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14" /></svg>
+          </button>
+        </div>
+        <div class="messages" id="messages">
+          <div class="message bot">
+            <span class="bot-avatar">AI</span>
+            <p>Your resume scored 14% for Senior AI Engineer. Want me to explain the gap or help improve it?</p>
+          </div>
+        </div>
+        <div class="chips" id="chips">
+          <button type="button">Explain my score</button>
+          <button type="button">Pros and cons</button>
+          <button type="button">My upskill roadmap</button>
+        </div>
+        <form class="chat-input" id="chatForm">
+          <input id="chatInput" type="text" placeholder="Ask about your score..." />
+          <button type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24"><path d="M4 12l16-8-4 16-4-7z" /></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <script src="./app.js?v=2"></script>
+  </body>
+</html>

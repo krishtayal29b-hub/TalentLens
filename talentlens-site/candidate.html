@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentLens Candidate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  </head>
+  <body class="portal-body" data-page="candidate">
+    <header class="topbar" id="topbar">
+      <a class="brand" href="./index.html" aria-label="TalentLens home">
+        <span class="brand-mark">TL</span>
+        <span>TalentLens Candidate</span>
+      </a>
+      <nav class="nav-links" aria-label="Portal navigation">
+        <a href="./index.html">Front Page</a>
+        <a href="./recruiter.html" target="_blank" rel="noopener">Recruiter</a>
+        <a href="./explorer.html" target="_blank" rel="noopener">Explorer</a>
+        <a href="./sandbox.html" target="_blank" rel="noopener">Sandbox</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="portalThemeToggle" type="button" aria-label="Switch theme">
+          <span>Blue</span>
+          <span class="switch" aria-hidden="true"><span></span></span>
+          <span>Green</span>
+        </button>
+        <button class="button secondary" id="signOutButton" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <main class="portal-shell">
+      <section class="auth-card card" id="authGate">
+        <span class="eyebrow">Two-step sign-in</span>
+        <h1>Candidate access</h1>
+        <p>
+          Your upload area is protected by email/password plus a verification code. This local
+          version shows the code on-screen; production would send it by email or authenticator app.
+        </p>
+        <form id="sendCodeForm">
+          <label>
+            Email
+            <input id="authEmail" type="email" placeholder="candidate@email.com" required />
+          </label>
+          <label>
+            Password
+            <input id="authPassword" type="password" minlength="8" placeholder="At least 8 characters" required />
+          </label>
+          <button class="button primary" type="submit">Send verification code</button>
+        </form>
+        <form class="hidden" id="codeStep">
+          <p>Demo verification code: <span class="auth-code" id="demoCode">000000</span></p>
+        </form>
+        <form id="verifyCodeForm">
+          <label>
+            Verification code
+            <input id="authCode" type="text" inputmode="numeric" placeholder="6-digit code" />
+          </label>
+          <button class="button secondary" type="submit">Verify and enter</button>
+        </form>
+      </section>
+
+      <section class="hidden" id="portalApp">
+        <div class="portal-hero">
+          <div>
+            <span class="eyebrow">Candidate window</span>
+            <h1>Upload a real resume and see the role fit.</h1>
+            <p>
+              Choose a recruiter-created job, upload a resume, or paste resume text. TalentLens
+              reads the content and analyzes it against that role's actual requirements.
+            </p>
+          </div>
+          <div class="portal-actions">
+            <span class="pill blue">Signed in: <span id="signedInUser"></span></span>
+            <a class="button secondary" href="./recruiter.html" target="_blank" rel="noopener">Open recruiter window</a>
+          </div>
+        </div>
+
+        <div class="portal-grid">
+          <form class="card portal-form" id="resumeForm">
+            <h3>Resume analysis</h3>
+            <label>
+              Recruiter job
+              <select id="candidateJob"></select>
+            </label>
+            <label>
+              Resume file
+              <input class="portal-file" id="resumeFile" type="file" accept=".pdf,.txt,.md,.doc,.docx" />
+            </label>
+            <label>
+              Paste resume text if the PDF cannot be read
+              <textarea id="resumeText" rows="10" placeholder="Paste resume content here for the most reliable local analysis."></textarea>
+            </label>
+            <button class="button primary" id="analyzeButton" type="submit">Analyze resume</button>
+          </form>
+
+          <div class="card hidden" id="candidateResult">
+            <span class="card-label">No analysis yet</span>
+            <h3>Upload or paste your resume</h3>
+            <p>
+              The result will show score, matched skills, missing skills, advice, and interview
+              questions based on the selected recruiter job.
+            </p>
+            <div class="analysis-block">
+              <h4>Reliable local upload tips</h4>
+              <ul>
+                <li>Text files are read exactly.</li>
+                <li>Many PDFs can be partially read, but pasted text is most accurate.</li>
+                <li>Your data stays in this browser storage for this demo.</li>
+              </ul>
+            </div>
+          </div>
+
+  <div class="card portal-stack" id="historySection">
+    <div class="card-heading">
+      <h3>Your analysis history</h3>
+      <span class="eyebrow" id="historyCount">0 analyses</span>
+    </div>
+    <div class="history-list" id="historyList">
+      <p style="color:var(--text-muted);font-size:13px">
+        No analyses yet. Upload a resume above to start.
+      </p>
+    </div>
+  </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="portal-toast" id="portalToast"></div>
+    <script src="./portal.js"></script>
+  <script>
+  // History section — reads from portal.js localStorage
+  (function renderHistory() {
+    const analyses = (() => {
+      try {
+        return JSON.parse(
+          localStorage.getItem("tl_analyses")) ?? [];
+      } catch { return []; }
+    })();
+
+    const list  = document.getElementById("historyList");
+    const count = document.getElementById("historyCount");
+    if (!list) return;
+
+    if (count) count.textContent =
+      `${analyses.length} ${analyses.length === 1
+        ? "analysis" : "analyses"}`;
+
+    if (!analyses.length) return;
+
+    function scoreClass(s) {
+      return s >= 75 ? "good" : s >= 60 ? "mid" : "low";
+    }
+
+    list.innerHTML = analyses.slice(0, 10).map((a) => `
+      <div class="history-item">
+        <div>
+          <strong style="font-size:13px">
+            ${a.jobTitle || "Unknown role"}</strong>
+          <div class="history-meta">
+            ${new Date(a.createdAt)
+              .toLocaleDateString("en-GB",
+              { day:"numeric", month:"short", year:"numeric" })}
+            · ${a.fileName || "resume"}
+          </div>
+        </div>
+        <span class="score ${scoreClass(a.score)}">
+          ${a.score}%
+        </span>
+      </div>`
+    ).join("");
+  })();
+  </script>
+  </body>
+</html>

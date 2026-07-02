@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentLens Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="portal-body" data-page="explorer">
+    <header class="topbar" id="topbar">
+      <a class="brand" href="./index.html" aria-label="TalentLens home">
+        <span class="brand-mark">TL</span>
+        <span>TalentLens Explorer</span>
+      </a>
+      <nav class="nav-links" aria-label="Portal navigation">
+        <a href="./index.html">Front Page</a>
+        <a href="./recruiter.html" target="_blank" rel="noopener">Recruiter</a>
+        <a href="./candidate.html" target="_blank" rel="noopener">Candidate</a>
+        <a href="./sandbox.html" target="_blank" rel="noopener">Sandbox</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="portalThemeToggle" type="button" aria-label="Switch theme">
+          <span>Blue</span>
+          <span class="switch" aria-hidden="true"><span></span></span>
+          <span>Green</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="portal-shell">
+      <section class="portal-hero">
+        <div>
+          <span class="eyebrow">Explorer window</span>
+          <h1>Explore job demand, uploads, and skill gaps.</h1>
+          <p>
+            Explorer reads shared TalentLens data from the Recruiter and Candidate windows. It is
+            a separate operational view for reviewing hiring signal across the system.
+          </p>
+        </div>
+        <div class="portal-actions">
+          <a class="button primary" href="./recruiter.html" target="_blank" rel="noopener">Open recruiter</a>
+          <a class="button secondary" href="./candidate.html" target="_blank" rel="noopener">Open candidate</a>
+        </div>
+      </section>
+
+      <section class="portal-grid three">
+        <article class="card portal-metric">
+          <span class="card-label">Recruiter jobs</span>
+          <strong id="metricJobs">0</strong>
+          <p>Saved role requirements available for candidate analysis.</p>
+        </article>
+        <article class="card portal-metric">
+          <span class="card-label">Resume uploads</span>
+          <strong id="metricUploads">0</strong>
+          <p>Candidate analyses generated from real uploaded or pasted resume content.</p>
+        </article>
+        <article class="card portal-metric">
+          <span class="card-label">Average score</span>
+          <strong id="metricAverage">0%</strong>
+          <p>Overall fit across all local analyses currently stored in this browser.</p>
+        </article>
+      </section>
+
+      <section class="portal-grid portal-stack">
+        <div class="card">
+          <div class="card-heading">
+            <h3>Analysis feed</h3>
+            <span class="status screening">Live local data</span>
+          </div>
+          <div id="explorerFeed"></div>
+        </div>
+        <div class="card">
+          <h3>Recurring missing skills</h3>
+          <div class="gap-chart" id="skillGaps"></div>
+        </div>
+      </section>
+
+      <section class="portal-hero">
+        <div>
+          <span class="eyebrow">Real dataset analytics</span>
+          <h1>The full 100K-candidate Redrob pool, scored offline.</h1>
+          <p>
+            Aggregate stats computed from <code>rank.py</code> running the same scoring engine as
+            the <a href="./sandbox.html">live sandbox</a> against the full released dataset.
+          </p>
+        </div>
+      </section>
+
+      <section class="portal-grid three">
+        <article class="card portal-metric">
+          <span class="card-label">Candidates scored</span>
+          <strong id="dsTotal">—</strong>
+          <p>Full dataset released for the challenge.</p>
+        </article>
+        <article class="card portal-metric">
+          <span class="card-label">Honeypots detected</span>
+          <strong id="dsHoneypots">—</strong>
+          <p>Impossible profiles automatically excluded from ranking.</p>
+        </article>
+        <article class="card portal-metric">
+          <span class="card-label">Rank-100 cutoff score</span>
+          <strong id="dsCutoff">—</strong>
+          <p>Minimum score to make the top-100 submission.</p>
+        </article>
+      </section>
+
+      <section class="portal-grid portal-stack">
+        <div class="card">
+          <h3>Most common current titles in the pool</h3>
+          <div class="gap-chart" id="dsTitles"></div>
+        </div>
+        <div class="card">
+          <h3>Experience distribution</h3>
+          <div class="gap-chart" id="dsExperience"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="portal-toast" id="portalToast"></div>
+    <script src="./portal.js"></script>
+    <script src="./dataset-stats.js"></script>
+  </body>
+</html>

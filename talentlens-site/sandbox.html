@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentLens Ranking Sandbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="portal-body" data-page="sandbox">
+    <header class="topbar" id="topbar">
+      <a class="brand" href="./index.html" aria-label="TalentLens home">
+        <span class="brand-mark">TL</span>
+        <span>TalentLens Sandbox</span>
+      </a>
+      <nav class="nav-links" aria-label="Portal navigation">
+        <a href="./index.html">Front Page</a>
+        <a href="./recruiter.html" target="_blank" rel="noopener">Recruiter</a>
+        <a href="./candidate.html" target="_blank" rel="noopener">Candidate</a>
+        <a href="./explorer.html" target="_blank" rel="noopener">Explorer</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="portalThemeToggle" type="button" aria-label="Switch theme">
+          <span>Blue</span>
+          <span class="switch" aria-hidden="true"><span></span></span>
+          <span>Green</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="portal-shell">
+      <section class="portal-hero">
+        <div>
+          <span class="eyebrow">Reproducible ranking sandbox</span>
+          <h1>Rank real candidates against the Senior AI Engineer JD — live, in this browser.</h1>
+          <p>
+            This runs the same feature-based scoring pipeline as our offline <code>rank.py</code>
+            (ported line-for-line to JS), against the real Redrob candidate schema. No hosted LLM
+            calls, no GPU, nothing sent over the network &mdash; everything below happens locally
+            in your browser in well under a second.
+          </p>
+        </div>
+        <div class="portal-actions">
+          <span class="pill blue" id="datasetPill">100,000 candidates scored offline</span>
+          <span class="pill amber" id="honeypotPill">— honeypots flagged</span>
+        </div>
+      </section>
+
+      <section class="portal-grid portal-stack">
+        <div class="card">
+          <h3>1. Choose a candidate sample</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin-top:-6px">
+            Use the bundled 50-candidate sample from the released dataset, or upload your own
+            JSON file (an array of candidate objects matching <code>candidate_schema.json</code>,
+            max 100 candidates &mdash; this mirrors the hackathon's sandbox requirement).
+          </p>
+          <div class="portal-actions" style="margin-top:12px">
+            <button class="button primary" id="useSampleBtn" type="button">Use bundled sample (50)</button>
+            <label class="button secondary" for="uploadInput" style="cursor:pointer">Upload candidates.json</label>
+            <input id="uploadInput" type="file" accept="application/json" class="hidden" />
+          </div>
+          <p id="sampleStatus" style="font-size:13px;color:var(--text-muted);margin-top:10px"></p>
+        </div>
+
+        <div class="card">
+          <h3>2. Run the ranker</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin-top:-6px">
+            Scores each candidate against the JD's hard requirements (embeddings, vector search,
+            ranking/eval frameworks, production Python), penalizes keyword-stuffed non-engineering
+            titles, consulting-only careers, and LangChain-only "trap" profiles, and blends in
+            Redrob behavioral signals (response rate, recency, notice period). Honeypot profiles
+            are detected and forced out of the ranking.
+          </p>
+          <div class="portal-actions" style="margin-top:12px">
+            <button class="button primary large" id="runRankBtn" type="button" disabled>Run ranking</button>
+            <span id="runTiming" class="mono" style="color:var(--text-muted);font-size:13px"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card table-card portal-stack">
+        <div class="card-heading">
+          <h3>Ranked results</h3>
+          <button class="button secondary" id="downloadCsvBtn" type="button" disabled>Download submission.csv</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Candidate</th>
+              <th>Title / Company</th>
+              <th>Score</th>
+              <th>Reasoning</th>
+            </tr>
+          </thead>
+          <tbody id="rankRows">
+            <tr><td colspan="5">Choose a sample above, then run the ranker.</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <div class="portal-toast" id="portalToast"></div>
+    <script src="./ranking.js"></script>
+    <script src="./sandbox.js"></script>
+  </body>
+</html>
